@@ -7,7 +7,7 @@ export default defineConfig({
   // routes: [
   //   { path: '/', component: '@/pages/index' },
   // ],
-  title:'练习',
+  title:'华融讯方商户控制台',
   fastRefresh: {},
   antd:{
     compact:true,

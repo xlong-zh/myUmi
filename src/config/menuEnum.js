@@ -4,6 +4,7 @@ import {
   WalletOutlined,
   ShoppingOutlined,
   AppstoreOutlined,
+  ContainerOutlined,
 } from '@ant-design/icons';
 
 export const menuEnum = [
@@ -51,6 +52,20 @@ export const menuEnum = [
       {
         name: '我的商品',
         path: '/myProduct',
+      },
+    ],
+  },
+  {
+    name: '订单管理',
+    icon: <ContainerOutlined />,
+    children: [
+      {
+        name: '订单列表',
+        path: '/orderList',
+      },
+      {
+        name: '订单对账',
+        path: '/orderBalance',
       },
     ],
   },
