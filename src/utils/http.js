@@ -2,7 +2,8 @@ import Axios from 'axios';
 import { history, useLocation } from 'umi';
 import json2formdata from 'json2formdata';
 import Cookie from 'js-cookie';
-import { createSignature, showMessage, obj2url } from './index';
+import { message } from 'antd';
+import { createSignature, obj2url } from './index';
 
 const TIME_OUT = 5000; // 请求超时时间
 const BASE_URL = 'http://test.openapi.huarongxunfang.com'; //接口域名
@@ -34,13 +35,13 @@ function handleErr(err) {
   if (typeof err === 'object') {
     if (Axios.isCancel(err)) return;
     if ((err?.message || '').includes('timeout')) {
-      return showMessage('error', '请求超时');
+      return message.error('请求超时');
     }
     const { codeError = false, msg = '请求出错' } = err;
-    if (codeError) return showMessage('error', msg);
-    return showMessage('error', err.toString());
+    if (codeError) return message.error(msg);
+    return message.error(err.toString());
   }
-  showMessage('error', err);
+  message.error(err);
 }
 
 // code码处理

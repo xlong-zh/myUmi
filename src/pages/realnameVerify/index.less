@@ -1,0 +1,42 @@
+@import '~@/theme/vars.less';
+
+.alert {
+  font-size: 14px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  :global {
+    .ant-alert-message {
+      color: @blue;
+      margin-left: 10px;
+    }
+  }
+}
+
+.tabs {
+  margin-bottom: 16px;
+  :global {
+    .ant-tabs-tab {
+      font-size: 14px;
+    }
+    .ant-tabs-tab {
+      height: 40px;
+      line-height: 40px;
+      padding: 0 16px;
+      background-color: #f8f8f8;
+      color: #666;
+      margin-left: 0;
+      border: 1px solid #e8e8e8;
+      &-active {
+        padding-bottom: 1px;
+        border-color: #e8e8e8;
+        background-color: @blue;
+        .ant-tabs-tab-btn {
+          color: #fff;
+        }
+      }
+    }
+    .ant-tabs-ink-bar {
+      visibility: hidden;
+    }
+  }
+}

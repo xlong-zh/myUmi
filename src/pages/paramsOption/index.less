@@ -1,0 +1,27 @@
+.card {
+  width: 45%;
+  font-size: 14px;
+  :global {
+    .ant-card-head {
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 2px 2px 0 0;
+    }
+    .ant-card-head-title {
+      padding: 16px 0;
+      font-size: 16px;
+    }
+    .ant-card-body {
+      min-height: 100px;
+    }
+    .ant-card-actions {
+      background-color: #fafafa;
+      & > li {
+        margin: 12px 0;
+        & > span {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

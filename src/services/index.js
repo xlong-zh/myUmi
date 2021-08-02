@@ -71,6 +71,12 @@ export const productSort = (data) =>
     data,
     method: 'get',
   });
+// 我的商品
+export const myProduct = (data) =>
+  http('/product/getList', {
+    data,
+    method: 'get',
+  });
 
 //设置用户信息
 export const setInfo = (data) =>
@@ -83,19 +89,39 @@ export const setInfo = (data) =>
 export const getSetting = (data) => http('/user/getSetting', { data });
 
 // 短信通知设置
-export const setNotice = (data) =>
-  http('/user/setNotice', { data, method: 'post' });
+export const setNotice = (data) => http('/user/setNotice', { data, method: 'post' });
 
 // 显示密钥
-export const getSecret = (data) =>
-  http('/user/getSecret', { data, method: 'post' });
+export const getSecret = (data) => http('/user/getSecret', { data, method: 'post' });
 
 // 重置密钥
-export const resetSecret = (data) =>
-  http('/user/resetSecret', { data, method: 'post' });
+export const resetSecret = (data) => http('/user/resetSecret', { data, method: 'post' });
 
 //提交认证
 export const doAuth = (data) => http('/user/doAuth', { data, method: 'post' });
 
 // 获取认证
 export const getAuthInfo = () => http('/user/getAuthInfo');
+
+// 公告列表
+export const noticeList = (data) =>
+  http('/doc/getNoticeList', {
+    data,
+    method: 'get',
+  });
+
+// 公告详情
+export const requestNoticeDetail = (data) =>
+  http('/doc/getNoticeContent', {
+    data,
+    method: 'get',
+  });
+
+// 获取订单列表
+export const getOrderList = (data) => http('/order/getList', { data });
+
+// 获取订单报文接口
+export const getCallbackInfo = (data) => http('/order/getCallback', { data });
+
+// 获取对账单列表
+export const getBill = (data) => http('/order/getBill', { data });

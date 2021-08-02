@@ -1,0 +1,72 @@
+.secretKey {
+  padding: 20px 20px 20px 70px;
+}
+
+.alert {
+  font-size: 14px;
+  margin: 20px 0 10px;
+  :global {
+    .ant-alert-message {
+      color: #666;
+    }
+  }
+}
+
+.line {
+  height: 40px;
+  line-height: 40px;
+  display: flex;
+  font-size: 14px;
+  margin-bottom: 24px;
+  color: rgba(0, 0, 0, 0.65);
+  label {
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 700;
+    display: block;
+    position: relative;
+    &:after {
+      content: ':';
+      margin: 0 8px 0 2px;
+    }
+  }
+  :global {
+    .ant-btn {
+      min-width: 90px;
+      height: 40px;
+      border-radius: 4px;
+    }
+  }
+}
+
+.modal {
+  :global {
+    .ant-modal-header {
+      padding: 16px 24px;
+    }
+    .ant-modal-title {
+      font-size: 16px;
+    }
+    .ant-form-item-label > label {
+      font-size: 14px;
+    }
+  }
+}
+
+.formItem {
+  font-size: 14px;
+  margin-bottom: 24px;
+  height: 40px;
+  line-height: 40px;
+  color: rgba(0, 0, 0, 0.65);
+  :global {
+    .ant-input,
+    .ant-btn {
+      font-size: 14px;
+      height: 32px;
+    }
+    .ant-btn {
+      width: auto !important;
+      padding: 0 15px;
+    }
+  }
+}

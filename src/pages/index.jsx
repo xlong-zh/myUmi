@@ -1,5 +1,6 @@
-import { useState } from 'react';
-export default function Index() {
-  const [name, setName] = useState('开发');
-  return <div className="title">{name}</div>;
-}
+import { memo } from 'react';
+import { Redirect } from 'umi';
+import styles from './index.less';
+export default memo(function Index() {
+  return <Redirect to="/home" />;
+});

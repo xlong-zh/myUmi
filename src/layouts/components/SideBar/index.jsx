@@ -10,10 +10,11 @@ import styles from './index.less';
 const { Sider } = Layout;
 const { Item, SubMenu } = Menu;
 
-export default memo(function Index(props) {
+export default memo(function Index() {
   const history = useHistory();
   const { pathname } = useLocation();
   const [collapsed, setCollapsed] = useState(false);
+
   const [selKeys, openKeys] = useMemo(() => {
     return getBredName(menuEnum, pathname);
   }, [pathname]);
@@ -40,9 +41,8 @@ export default memo(function Index(props) {
         <img src={logo} alt="" />
         <span>华融讯方商户控制台</span>
       </div>
-      {/* defaultSelectedKeys={[selKeys]}
-    defaultOpenKeys={[openKeys]} */}
-      <Menu className={styles.menu} defaultSelectedKeys={['1']} mode="inline">
+
+      <Menu className={styles.menu} mode="inline" defaultSelectedKeys={[selKeys]} defaultOpenKeys={[openKeys]}>
         {menuEnum.map(mapMenu)}
       </Menu>
       <div className={styles.collapsed}>
