@@ -1,5 +1,5 @@
-import { memo, useLayoutEffect, useRef } from 'react';
-// import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { memo, useLayoutEffect } from 'react';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { Layout, Spin } from 'antd';
 import SideBar from '../SideBar';
 import Header from '../Header';
@@ -9,9 +9,8 @@ import styles from './index.less';
 const { Content } = Layout;
 
 export default memo(function Index({ children }) {
-  // const firstLoaded = useRef(false);
   // const dispatch = useDispatch();
-  // const { loading } = useSelector((state) => state.app, shallowEqual);
+  // const { loading, userInfo } = useSelector((state) => state.app, shallowEqual);
   // useLayoutEffect(() => {
   //   dispatch({ type: 'app/getUderInfo' });
   // }, []);
@@ -23,7 +22,7 @@ export default memo(function Index({ children }) {
         <Header />
         <Bred />
         <Content className={styles.content}>
-          <div className={styles.pageBody}>
+          <div className={styles.pageBody} id="pageBody">
             <Spin spinning={false}>{children}</Spin>
           </div>
         </Content>

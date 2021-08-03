@@ -1,7 +1,7 @@
 import { memo, useRef, useState, useMemo, useEffect } from 'react';
 import { Dropdown, Avatar, Button } from 'antd';
 import { history } from 'umi';
-import Cookies from 'js-cookie';
+import Cookie from 'js-cookie';
 // import { useSelector, shallowEqual } from 'react-redux';
 import { UserOutlined } from '@ant-design/icons';
 // import ChangePwd from '@/components/ChangePwd';
@@ -13,6 +13,18 @@ export default memo(function Index() {
   const [modal, setModal] = useState(false);
   const container = useRef(null);
   // const { userInfo } = useSelector((state) => state.app, shallowEqual);
+
+  // useEffect(() => {
+  //   if (userInfo?.phone) {
+  //     setPhone(userInfo?.phone);
+  //     setAmount(userInfo?.amount);
+  //   }
+  // }, [userInfo]);
+
+  function handleQuit() {
+    Cookie.remove('token');
+    history.push('/login');
+  }
 
   const overlay = useMemo(() => {
     const dotIndex = amount.indexOf('.');
@@ -46,19 +58,6 @@ export default memo(function Index() {
       </>
     );
   }, [amount]);
-
-  // useEffect(() => {
-  //   if (userInfo?.phone) {
-  //     setPhone(userInfo?.phone);
-  //     setAmount(userInfo?.amount);
-  //   }
-  // }, [userInfo]);
-
-  function handleQuit() {
-    Cookies.remove('token');
-    window.sessionStorage.clear();
-    history.push('/login');
-  }
 
   return (
     <>

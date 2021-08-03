@@ -45,3 +45,19 @@ export function getBredName(data = [], pathname, parentName) {
   }
   return [];
 }
+/**
+ * 校验规则函数
+ */
+export function validateRules(rules, emptyText, errText) {
+  const validator = (_, value) => {
+    if (!value) {
+      return Promise.reject(new Error(emptyText || '请输入联系人电话!'));
+    }
+    return rules.test(value) ? Promise.resolve() : Promise.reject(new Error(errText || '请输入正确的电话号码!'));
+  };
+  return validator;
+}
+
+export function limitNum(e) {
+  return e.target.value.replace(/[^\d]/g, '').replace(/^0{1,}/g, '');
+}

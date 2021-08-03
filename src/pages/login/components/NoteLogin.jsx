@@ -1,12 +1,12 @@
-import { memo, useState, useMemo, useRef } from 'react';
-import { Link, useHistory } from 'umi';
-import { Button, Form, Input, Row, Col, message } from 'antd';
-import { LeftOutlined } from '@ant-design/icons';
-import { validateRules, limitNum } from '@/utils/index';
-import { sendVerifyCode, updatePwd } from '@/services/index';
-import VerifyCode from './components/VerifyCode';
+import { memo, useMemo, useState, useRef } from 'react';
+import { useHistory, useDispatch } from 'umi';
+import Cookie from 'js-cookie';
+import { Form, Row, Col, Button, Input, Checkbox, message } from 'antd';
+import { limitNum, validateRules } from '@/utils/index';
+import { codeLogin, sendVerifyCode } from '@/services/index';
+import VerifyCode from './VerifyCode';
 
-import styles from './index.less';
+import styles from '../index.less';
 
 const { useForm, Item } = Form;
 const layout = {
@@ -22,10 +22,12 @@ const layout = {
 
 export default memo(function Index() {
   const [loading, setLoading] = useState(false);
+  const [remember, setRemember] = useState(false);
+  const verifyRef = useRef();
   const [form] = useForm();
   const { validateFields } = form;
-  const verifyRef = useRef();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const sendCode = async () => {
     try {
@@ -37,7 +39,7 @@ export default memo(function Index() {
       verifyRef.current?.count();
       message.success(msg);
     } catch (err) {
-      console.error(err);
+      console.log(err);
     } finally {
       verifyRef.current?.setLoading(false);
     }
@@ -46,12 +48,19 @@ export default memo(function Index() {
   const onFinish = async (values) => {
     setLoading(true);
     try {
-      await updatePwd(values);
-      message.success('修改成功');
-      history.push('/login');
-    } catch (e) {
-      console.log(e);
-    } finally {
+      const {
+        data: { usertoken },
+      } = await codeLogin(values);
+      message.success('登录成功');
+      Cookie.set('token', usertoken, { domain: '.huarongxunfang.com' });
+      // 是否记住密码
+      await dispatch({
+        type: 'app/setState',
+        payload: { remember },
+      });
+      history.push('/home');
+    } catch {
+      Cookie.remove('token');
       setLoading(false);
     }
   };
@@ -70,16 +79,6 @@ export default memo(function Index() {
         content: <Input className={styles.input} maxLength={11} autoComplete="off" />,
       },
       {
-        label: '密码',
-        name: 'password',
-        rules: [
-          {
-            validator: validateRules(/^[0-9A-Za-z]{6,20}$/, '请输入密码!', '密码为6-20位字符'),
-          },
-        ],
-        content: <Input className={styles.input} type="password" maxLength={20} autoComplete="off" />,
-      },
-      {
         label: '验证码',
         name: 'code',
         getValueFromEvent: limitNum,
@@ -95,27 +94,32 @@ export default memo(function Index() {
   );
 
   return (
-    <div style={{ marginTop: 35 }} className={styles.content_box}>
-      <div className={styles.forgetTitle}>
-        <Link to="/login">
-          <LeftOutlined />
-        </Link>
-        找回密码
-      </div>
+    <div style={{ marginTop: 35 }}>
       <Form form={form} layout="vertical" {...layout} onFinish={onFinish}>
         {formList.map(({ name, content, ...rest }) => (
           <Item key={name} name={name} {...rest} style={{ marginTop: 20 }}>
             {content}
           </Item>
         ))}
-        <Row style={{ marginBottom: 20 }}>
+        <Row>
           <Col span={16} offset={4}>
+            <Checkbox checked={remember} className={styles.checkbox} onChange={(e) => setRemember(e.target.checked)}>
+              记住密码
+            </Checkbox>
             <Button type="primary" htmlType="submit" loading={loading} style={{ marginTop: 10 }}>
-              确认更改
+              登录
             </Button>
           </Col>
         </Row>
       </Form>
+      <Row>
+        <Col span={16} offset={4}>
+          <div className={styles.back_end}>
+            <div onClick={() => history.push('/login/forgetPwd')}>忘记密码?</div>
+            <div onClick={() => history.push('/login/register')}>立即注册</div>
+          </div>
+        </Col>
+      </Row>
     </div>
   );
 });
