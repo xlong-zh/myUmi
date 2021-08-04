@@ -2,9 +2,9 @@ import { memo, useRef, useState, useMemo, useEffect } from 'react';
 import { Dropdown, Avatar, Button } from 'antd';
 import { history } from 'umi';
 import Cookie from 'js-cookie';
-// import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import { UserOutlined } from '@ant-design/icons';
-// import ChangePwd from '@/components/ChangePwd';
+import ChangePwd from '@/components/ChangePwd';
 import styles from './index.less';
 
 export default memo(function Index() {
@@ -12,14 +12,14 @@ export default memo(function Index() {
   const [amount, setAmount] = useState('');
   const [modal, setModal] = useState(false);
   const container = useRef(null);
-  // const { userInfo } = useSelector((state) => state.app, shallowEqual);
+  const { userInfo } = useSelector((state) => state.app, shallowEqual);
 
-  // useEffect(() => {
-  //   if (userInfo?.phone) {
-  //     setPhone(userInfo?.phone);
-  //     setAmount(userInfo?.amount);
-  //   }
-  // }, [userInfo]);
+  useEffect(() => {
+    if (userInfo?.phone) {
+      setPhone(userInfo?.phone);
+      setAmount(userInfo?.amount);
+    }
+  }, [userInfo]);
 
   function handleQuit() {
     Cookie.remove('token');
@@ -67,7 +67,7 @@ export default memo(function Index() {
           <span>{phone}</span>
         </div>
       </Dropdown>
-      {/* {modal && <ChangePwd onCancel={() => setModal(false)} />} */}
+      {modal && <ChangePwd onCancel={() => setModal(false)} />}
     </>
   );
 });

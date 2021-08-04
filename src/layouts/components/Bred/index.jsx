@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react';
-import { useLocation, useRouteMatch } from 'umi';
+import { useLocation } from 'umi';
 import { menuEnum } from '@/config/menuEnum';
 import { getBredName } from '@/utils/index';
 

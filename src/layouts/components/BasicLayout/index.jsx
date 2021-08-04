@@ -9,10 +9,10 @@ import styles from './index.less';
 const { Content } = Layout;
 
 export default memo(function Index({ children }) {
-  // const dispatch = useDispatch();
-  // const { loading, userInfo } = useSelector((state) => state.app, shallowEqual);
+  const dispatch = useDispatch();
+  const { loading, userInfo } = useSelector((state) => state.app, shallowEqual);
   // useLayoutEffect(() => {
-  //   dispatch({ type: 'app/getUderInfo' });
+  //   dispatch({ type: 'app/getUserInfo' });
   // }, []);
 
   return (
@@ -23,7 +23,7 @@ export default memo(function Index({ children }) {
         <Bred />
         <Content className={styles.content}>
           <div className={styles.pageBody} id="pageBody">
-            <Spin spinning={false}>{children}</Spin>
+            <Spin spinning={loading}>{children}</Spin>
           </div>
         </Content>
       </Layout>

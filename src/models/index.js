@@ -5,7 +5,7 @@ export default {
   namespace: 'app',
   state: {
     loading: false,
-    useInfo: {},
+    userInfo: {},
     authInfo: '',
     remember: false,
   },
