@@ -1,0 +1,32 @@
+.picBox {
+  width: 160px;
+  height: 115px;
+  line-height: 115px;
+  text-align: center;
+  font-size: 14px;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.65);
+  border: 1px solid #d9d9d9;
+  img {
+    max-width: 95%;
+    max-height: 95%;
+    display: inline-block;
+  }
+}
+
+.upload {
+  :global {
+    .ant-upload-list {
+      visibility: hidden;
+      display: none;
+    }
+  }
+}
+
+.uploadBtn {
+  width: 160px;
+  height: 36px;
+  margin-top: 5px;
+  font-size: 14px;
+  border-radius: 4px;
+}

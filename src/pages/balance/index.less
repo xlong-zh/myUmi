@@ -9,17 +9,12 @@ h4 {
   width: 0px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 13px solid rgb(238 242 245);
+  border-bottom: 13px solid #ece9e973;
   left: 30px;
-}
-.balanceTitle {
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: 800;
 }
 .openBallance {
   display: flex;
-  background: rgb(238 242 245);
+  background: #ece9e973;
 }
 .ballanceNum {
   width: 130px;
@@ -33,8 +28,15 @@ h4 {
 }
 .balanceDivider {
   border-top: 2px solid rgba(0, 0, 0, 0.06);
+  margin-top: 8px;
 }
-
+.division {
+  width: 100%;
+  text-align: right;
+  h4 {
+    font-size: 13px;
+  }
+}
 .balanceForm {
   :global {
     .ant-col {
@@ -59,4 +61,11 @@ h4 {
       color: #444;
     }
   }
+}
+.warn {
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+  margin-top: 10px;
+  background-color: #f9f9f9;
 }

@@ -61,3 +61,21 @@ export function validateRules(rules, emptyText, errText) {
 export function limitNum(e) {
   return e.target.value.replace(/[^\d]/g, '').replace(/^0{1,}/g, '');
 }
+
+// file对象转换为base64
+export function getBase64(file) {
+  return new Promise(function (resolve, reject) {
+    let reader = new FileReader();
+    let imgResult = '';
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      imgResult = reader.result;
+    };
+    reader.onerror = function (error) {
+      reject(error);
+    };
+    reader.onloadend = function () {
+      resolve(imgResult);
+    };
+  });
+}

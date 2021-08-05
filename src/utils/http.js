@@ -75,7 +75,7 @@ export default function http(url, config = {}) {
       ...signatureObj,
     };
   } else {
-    const cookieToken = Cookie.get('token');
+    const cookieToken = Cookie.get('token', { domain: '.huarongxunfang.com' });
     console.log(cookieToken);
     const token = cookieToken || '5cc3b1091461354970163f6c17a54a14';
     config.headers = {
