@@ -12,4 +12,8 @@ export default defineConfig({
   theme: {
     '@font-size-sm': '14px',
   },
+  dynamicImport: {
+    loading: '@/dynamicImport/Loading',
+  },
+  favicon: 'https://cdn.huarongxunfang.com/common/favicon.ico',
 });

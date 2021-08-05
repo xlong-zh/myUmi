@@ -42,7 +42,7 @@ export const menuEnum = [
     ],
   },
   {
-    name: '商品',
+    name: '商品管理',
     icon: <ShoppingOutlined />,
     children: [
       {

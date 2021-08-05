@@ -45,7 +45,7 @@ export default memo(function Index() {
         await dispatch({
           type: 'app/setInfo',
           payload: {
-            ...area,
+            area,
             ...rest,
           },
         });
@@ -54,6 +54,24 @@ export default memo(function Index() {
       }
       setLoading(false);
     }
+  };
+
+  const validate = (data) => {
+    const ruleObj = {
+      area: /\S/,
+      address: /\S/,
+      email: /^[A-Za-z\d]+([-_.][A-Za-z\d]+)*@([A-Za-z\d]+[-.])+[A-Za-z\d]{2,4}$/,
+      qq: /^\d{5,10}$/,
+    };
+    const keysArr = Object.keys(data) || [];
+    let status = true;
+    for (const i of keysArr) {
+      if (!data[i] || !ruleObj[i].test(data[i])) {
+        setWarn((val) => [...val, i]);
+        status = false;
+      }
+    }
+    return status;
   };
 
   const formList = useMemo(

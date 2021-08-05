@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { history, useLocation } from 'umi';
+import { history } from 'umi';
 import json2formdata from 'json2formdata';
 import Cookie from 'js-cookie';
 import { message } from 'antd';
@@ -75,9 +75,9 @@ export default function http(url, config = {}) {
       ...signatureObj,
     };
   } else {
-    const sessionToken = sessionStorage.getItem('token');
     const cookieToken = Cookie.get('token');
-    const token = cookieToken || sessionToken || '';
+    console.log(cookieToken);
+    const token = cookieToken || '5cc3b1091461354970163f6c17a54a14';
     config.headers = {
       usertoken: token,
     };

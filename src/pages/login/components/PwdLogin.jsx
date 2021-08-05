@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo, useState, useEffect } from 'react';
 import { useHistory, useDispatch } from 'umi';
 import Cookie from 'js-cookie';
 import { Form, Row, Col, Button, Input, Checkbox, message } from 'antd';
@@ -20,10 +20,18 @@ const layout = {
 };
 export default memo(function Index() {
   const [loading, setLoading] = useState(false);
-  const [remember, setRemember] = useState(false);
   const [form] = useForm();
+  const { setFieldsValue } = form;
   const history = useHistory();
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const accountCache = window.localStorage.getItem('accountCache');
+    if (accountCache) {
+      setFieldsValue({
+        phone: accountCache,
+      });
+    }
+  }, []);
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -33,8 +41,7 @@ export default memo(function Index() {
       } = await pwdLogin(values);
       message.success('登录成功');
       Cookie.set('token', usertoken, { domain: '.huarongxunfang.com' });
-      // 是否记住密码
-      dispatch({ type: 'app/setState', payload: { remember } });
+      window.localStorage.setItem('accountCache', values.phone);
       history.push('/home');
     } catch (e) {
       Cookie.remove('token');
@@ -80,9 +87,6 @@ export default memo(function Index() {
         ))}
         <Row>
           <Col span={16} offset={4}>
-            <Checkbox checked={remember} className={styles.checkbox} onChange={(e) => setRemember(e.target.checked)}>
-              记住密码
-            </Checkbox>
             <Button type="primary" htmlType="submit" loading={loading} style={{ marginTop: 10 }}>
               登录
             </Button>

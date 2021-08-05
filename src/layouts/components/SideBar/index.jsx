@@ -1,4 +1,4 @@
-import { useState, memo, useMemo, useEffect } from 'react';
+import { useState, memo, useEffect } from 'react';
 import { Layout, Menu } from 'antd';
 import { useHistory, useLocation } from 'umi';
 import { menuEnum } from '@/config/menuEnum';
@@ -10,7 +10,7 @@ import styles from './index.less';
 const { Sider } = Layout;
 const { Item, SubMenu } = Menu;
 
-export default memo(function Index() {
+export default memo(function Index({ style }) {
   const [collapsed, setCollapsed] = useState(false);
   const [selKeys, setSelKeys] = useState([]);
   const [openKeys, setOpenKeys] = useState([]);
@@ -39,7 +39,12 @@ export default memo(function Index() {
   }, [pathname]);
 
   return (
-    <Sider collapsedWidth={64} collapsed={collapsed} className={styles.sider} style={{ backgroundColor: '#192632' }}>
+    <Sider
+      collapsedWidth={64}
+      collapsed={collapsed}
+      className={styles.sider}
+      style={{ backgroundColor: '#192632', ...style }}
+    >
       <div className={styles.logo}>
         <img src="https://cdn.huarongxunfang.com/common/logo.jpeg" alt="" />
         <span>华融讯方商户控制台</span>

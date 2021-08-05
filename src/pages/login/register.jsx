@@ -1,5 +1,5 @@
 import { memo, useState, useMemo, useRef } from 'react';
-import { useHistory, useDispatch } from 'umi';
+import { useHistory } from 'umi';
 import Cookie from 'js-cookie';
 import { Button, Form, Input, Checkbox, Row, Col, message } from 'antd';
 import { register, sendVerifyCode } from '@/services/index';
@@ -26,7 +26,6 @@ export default memo(function Index() {
   const history = useHistory();
   const [form] = useForm();
   const { validateFields } = form;
-  const dispatch = useDispatch();
 
   const sendCode = async () => {
     try {
@@ -50,11 +49,8 @@ export default memo(function Index() {
         data: { usertoken },
       } = await register({ ...values });
       message.success('注册成功!');
-      Cookie.set('token', 'usertoken');
-      await dispatch({
-        type: 'app/setState',
-        payload: { remember: true },
-      });
+      Cookie.set('token', usertoken, { domain: '.huarongxunfang.com' });
+      window.localStorage.setItem('accountCache', values.phone);
       history.push('/home');
     } catch (e) {
       console.log(e);

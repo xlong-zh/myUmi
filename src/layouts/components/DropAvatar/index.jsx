@@ -22,7 +22,7 @@ export default memo(function Index() {
   }, [userInfo]);
 
   function handleQuit() {
-    Cookie.remove('token');
+    Cookie.remove('token', { domain: '.huarongxunfang.com' });
     history.push('/login');
   }
 
