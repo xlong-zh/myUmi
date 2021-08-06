@@ -125,3 +125,18 @@ export const getCallbackInfo = (data) => http('/order/getCallback', { data });
 
 // 获取对账单列表
 export const getBill = (data) => http('/order/getBill', { data });
+
+// 获取协议列表
+export const agreementList = () => http('/doc/getAgreementList');
+
+// 获取协议详情
+export const agreementContent = (data) => http('/doc/getAgreementContent', { data, type: 'signature' });
+
+//设置回调地址
+export const setNotifyUrl = (data) => http('/user/setNotifyUrl', { data, method: 'post' });
+
+//设置白名单
+export const setIps = (data) => http('/user/setIps', { data, method: 'post' });
+
+// 获取对公账户信息
+export const getAccountInfo = () => http('/user/getAccountInfo');
