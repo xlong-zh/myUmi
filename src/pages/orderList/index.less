@@ -8,10 +8,33 @@
 }
 
 .desc {
-  padding: 20px 0 20px 50px;
   :global {
     * {
       font-size: 14px;
+    }
+  }
+}
+
+.singleTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tHead {
+  margin-top: 10px;
+  font-weight: 700;
+  border: 1px solid #f0f0f0;
+  border-bottom: none;
+  padding: 10px;
+}
+
+.row {
+  background-color: #fff;
+}
+
+.cTable {
+  :global {
+    .ant-table-thead > tr > th {
+      background-color: #fff;
     }
   }
 }
