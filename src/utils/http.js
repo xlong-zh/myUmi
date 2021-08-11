@@ -6,7 +6,8 @@ import { message } from 'antd';
 import { createSignature, obj2url } from './index';
 
 const TIME_OUT = 5000; // 请求超时时间
-const BASE_URL = 'http://test.openapi.huarongxunfang.com'; //接口域名
+// const BASE_URL = 'http://test.openapi.huarongxunfang.com'; //接口域名
+const BASE_URL = 'https://openapi.huarongxunfang.com'; //接口域名
 
 // axios请求默认配置
 const defineConfig = {
@@ -75,9 +76,8 @@ export default function http(url, config = {}) {
       ...signatureObj,
     };
   } else {
-    const cookieToken = Cookie.get('token', { domain: '.huarongxunfang.com' });
-    console.log(cookieToken);
-    const token = cookieToken || '5cc3b1091461354970163f6c17a54a14';
+    const cookieToken = Cookie.get('token');
+    const token = cookieToken || 'b00a98f09272d2ff6ede4be453c58571';
     config.headers = {
       usertoken: token,
     };

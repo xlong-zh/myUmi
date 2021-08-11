@@ -24,7 +24,6 @@ export default function Index() {
     await dispatch({
       type: 'app/getUserInfo',
     });
-    setInfo(authInfo);
   };
 
   const content = useMemo(() => {

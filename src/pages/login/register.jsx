@@ -5,6 +5,7 @@ import { Button, Form, Input, Checkbox, Row, Col, message } from 'antd';
 import { register, sendVerifyCode } from '@/services/index';
 import { validateRules, limitNum } from '@/utils/index';
 import VerifyCode from './components/VerifyCode';
+import WatchModal from './components/WatchModal';
 
 import styles from './index.less';
 
@@ -21,6 +22,7 @@ const layout = {
 };
 
 export default memo(function Index() {
+  const [modal, setModal] = useState(false);
   const [canRegister, setCanRegister] = useState(false);
   const verifyRef = useRef();
   const history = useHistory();
@@ -55,6 +57,10 @@ export default memo(function Index() {
     } catch (e) {
       console.log(e);
     }
+  };
+  const watchProtocol = (e) => {
+    e.stopPropagation();
+    setModal(true);
   };
 
   const formList = useMemo(
@@ -113,7 +119,8 @@ export default memo(function Index() {
         <Row>
           <Col span={16} offset={4}>
             <Checkbox checked={canRegister} onChange={(e) => setCanRegister(e.target.checked)}>
-              我已阅读并同意《福禄开放平台用户注册协议》
+              我已阅读并同意
+              <a onClick={watchProtocol}>《华融开放平台用户注册协议》</a>
             </Checkbox>
             <Button type="primary" htmlType="submit" style={{ marginTop: 10 }} disabled={!canRegister}>
               立即注册
@@ -129,6 +136,7 @@ export default memo(function Index() {
           </div>
         </Col>
       </Row>
+      {modal && <WatchModal code="openreg" title="注册协议" onCancel={() => setModal(false)} />}
     </div>
   );
 });

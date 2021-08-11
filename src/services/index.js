@@ -47,6 +47,7 @@ export const sendVerifyCodeNoPhone = (data) => http('/tool/doSendUserMsg');
 export const doChangePwd = (data) =>
   http('/user/doChangePwd', {
     data,
+    method: 'post',
   });
 
 // 获取用户信息

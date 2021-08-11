@@ -17,7 +17,7 @@ const layout = {
     offset: 4,
   },
 };
-export default memo(function Index(props) {
+export default memo(function Index({ onCancel, ...rest }) {
   const [loading, setLoading] = useState(false);
   const verifyRef = useRef();
   const [form] = useForm();
@@ -69,6 +69,7 @@ export default memo(function Index(props) {
     try {
       await doChangePwd(values);
       message.success('修改成功');
+      onCancel();
     } catch (error) {
       console.log(error);
     } finally {
@@ -77,7 +78,7 @@ export default memo(function Index(props) {
   };
 
   return (
-    <Modal title="修改密码" visible centered footer={false} {...props}>
+    <Modal title="修改密码" visible centered footer={false} onCancel={onCancel} {...rest}>
       <div className={styles.content_box}>
         <Form form={form} layout="vertical" {...layout} onFinish={onFinish}>
           {formList.map(({ name, content, ...rest }) => (

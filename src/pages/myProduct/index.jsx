@@ -1,4 +1,5 @@
 import { memo, useState, useRef, useEffect } from 'react';
+import { useLocation } from 'umi';
 import { Row, Col, Divider, Button, Select, Form, Input, Table, Space, Tag } from 'antd';
 import { productSort, myProduct } from '@/services/index';
 import styles from './index.less';
@@ -53,6 +54,7 @@ const columns = [
 
 export default memo(function Index(props) {
   const formRef = useRef();
+  const { state } = useLocation();
 
   const [selectInfo, setSelectInfo] = useState([]);
   const [secondInfo, setSecondInfo] = useState([]);
@@ -71,11 +73,11 @@ export default memo(function Index(props) {
       const res = await productSort();
       setSelectInfo(res.data);
       console.log(props);
-      if (props.location.state) {
-        const { first_id, second_id } = props.location.state;
+      if (state) {
+        const { first_id, second_id } = state;
         firstChange(first_id);
         secondChange(second_id);
-        formRef.current.setFieldsValue(props.location.state);
+        formRef.current.setFieldsValue(state);
       }
     } catch (error) {
       console.log(error);
@@ -119,13 +121,7 @@ export default memo(function Index(props) {
 
   return (
     <div style={{ padding: '0 20px' }}>
-      <Form
-        className={styles.balanceForm}
-        layout="inline"
-        ref={formRef}
-        initialValues={props.location.state}
-        onFinish={onFinish}
-      >
+      <Form className={styles.balanceForm} layout="inline" ref={formRef} initialValues={state} onFinish={onFinish}>
         <Row gutter={16} style={{ width: '100%' }}>
           <Col span={6}>
             <Form.Item label="一级分类" name="first_id">
