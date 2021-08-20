@@ -4,7 +4,7 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  title: '华融讯方商户控制台',
+  title: 'myUmi',
   fastRefresh: {},
   antd: {
     compact: true,
